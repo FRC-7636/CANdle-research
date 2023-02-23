@@ -20,7 +20,6 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    Candle.setDefaultCommand(new RunCommand(() -> Candle.baoshang(), Candle));
     // Configure the trigger bindings
     configureBindings();
   }
@@ -28,7 +27,7 @@ public class RobotContainer {
   private void configureBindings() {
     // controller.a().onTrue(new RunCommand(() -> music.playMusic(), music));
     // controller.b().onTrue(new RunCommand(() -> music.stopMusic(), music));
-    controller.x().whileTrue(new RunCommand(() -> Candle.rainbow(), Candle));
+    controller.x().onTrue(new RunCommand(() -> Candle.rainbow(), Candle));
     //controller.y().whileTrue(new RunCommand(() -> Candle.baoshang(), Candle))
     //              .onFalse(new InstantCommand(() -> Candle.stopAnimate(), Candle));
   }
