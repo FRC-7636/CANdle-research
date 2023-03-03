@@ -5,7 +5,7 @@ import frc.robot.Constants;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.CANdleConfiguration;
 import com.ctre.phoenix.led.RainbowAnimation;
-import com.ctre.phoenix.led.TwinkleAnimation;
+import com.ctre.phoenix.led.StrobeAnimation;
 import com.ctre.phoenix.led.CANdle.LEDStripType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -46,9 +46,9 @@ public class candle extends SubsystemBase {
   }
 
   public void baoshang() {
-    TwinkleAnimation bsAnimation = new TwinkleAnimation(100, 100, 100);
-    bsAnimation.setSpeed(1);
-    bsAnimation.setLedOffset(0);
-    m_candle.animate(bsAnimation);
+    StrobeAnimation sa = new StrobeAnimation(255, 0, 0);
+    sa.setSpeed(5);
+    sa.setLedOffset(0);
+    m_candle.animate(sa);
   }
 }

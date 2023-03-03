@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj.XboxController;
@@ -27,7 +28,8 @@ public class RobotContainer {
   private void configureBindings() {
     // controller.a().onTrue(new RunCommand(() -> music.playMusic(), music));
     // controller.b().onTrue(new RunCommand(() -> music.stopMusic(), music));
-    controller.x().onTrue(new RunCommand(() -> Candle.rainbow(), Candle));
+    controller.x().onTrue(Commands.run(() -> Candle.rainbow(), Candle));
+    controller.y().onTrue(Commands.run(() -> Candle.baoshang(), Candle));
     //controller.y().whileTrue(new RunCommand(() -> Candle.baoshang(), Candle))
     //              .onFalse(new InstantCommand(() -> Candle.stopAnimate(), Candle));
   }
