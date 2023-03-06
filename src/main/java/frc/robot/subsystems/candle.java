@@ -16,13 +16,27 @@ public class candle extends SubsystemBase {
 
   public candle() {
     m_candle.configFactoryDefault();
-    config.stripType = LEDStripType.GRB;
+    m_candle.clearAnimation(0);
+    config.stripType = LEDStripType.BRG;
     config.brightnessScalar = 0.6;
     m_candle.configAllSettings(config);
   }
 
   public void stopAnimate() {
+    m_candle.setLEDs(0, 0, 0);
     m_candle.clearAnimation(0);
+  }
+
+  public void moveLED(double y) {
+    if (y < -0.15) {
+      m_candle.setLEDs(0, 255, 0);
+    }
+    else if (y > 0.15) {
+      m_candle.setLEDs(255, 0, 0);
+    }
+    else {
+      stopAnimate();
+    }
   }
 
   public void rainbow() {
@@ -46,8 +60,11 @@ public class candle extends SubsystemBase {
   }
 
   public void baoshang() {
-    StrobeAnimation sa = new StrobeAnimation(255, 0, 0);
-    sa.setSpeed(5);
+    int R = (int)(Math.random() * 255);
+    int G = (int)(Math.random() * 255);
+    int B = (int)(Math.random() * 255);
+    StrobeAnimation sa = new StrobeAnimation(R, G, B);
+    sa.setSpeed(0.3);
     sa.setLedOffset(0);
     m_candle.animate(sa);
   }
