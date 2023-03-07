@@ -17,7 +17,7 @@ public class RobotContainer {
   private Chassis chassis = new Chassis();
   private candle Candle = new candle();
   private final CommandXboxController c_controller = new CommandXboxController(Constants.controller);
-  private final XboxController controller = new XboxController(Constants.controller);
+  // private final XboxController controller = new XboxController(Constants.controller);
 
 
   private void chassis_v() {
