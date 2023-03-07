@@ -25,8 +25,8 @@ public class Chassis extends SubsystemBase {
         RR.follow(RF);
     }
 
-    public void move(double y, double z) {
-        DD.curvatureDrive(y*0.4, z*0.4, false);
+    public void move(double y, double z, boolean quickTurn) {
+        DD.curvatureDrive(y*0.4, z*0.4, quickTurn);
     }
 
 }
