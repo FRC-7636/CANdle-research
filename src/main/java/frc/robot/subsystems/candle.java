@@ -8,11 +8,13 @@ import com.ctre.phoenix.led.RainbowAnimation;
 import com.ctre.phoenix.led.StrobeAnimation;
 import com.ctre.phoenix.led.CANdle.LEDStripType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class candle extends SubsystemBase {
   private CANdle m_candle = new CANdle(Constants.candleID);
   private final CANdleConfiguration config = new CANdleConfiguration();
+
 
   public candle() {
     m_candle.configFactoryDefault();
@@ -67,5 +69,11 @@ public class candle extends SubsystemBase {
     sa.setSpeed(0.3);
     sa.setLedOffset(0);
     m_candle.animate(sa);
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("LED Temp.", m_candle.getTemperature());
   }
 }
