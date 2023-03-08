@@ -4,7 +4,9 @@ import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Chassis extends SubsystemBase {
@@ -23,14 +25,28 @@ public class Chassis extends SubsystemBase {
         LR.setInverted(true);
         LR.follow(LF);
         RR.follow(RF);
+        
     }
+    SlewRateLimiter limiter1 = new SlewRateLimiter(1, -1, 0);
+    SlewRateLimiter limiter2 = new SlewRateLimiter(1, -1, 0);
 
     public void move(double y, double z) {
         boolean quickTurn = false;
         if (Math.abs(y) < 0.15) {
             quickTurn = true;
         }
-        DD.curvatureDrive(y*0.4, z*0.4, quickTurn);
+        DD.curvatureDrive(y*0.6, z*0.6, quickTurn);
+        y = limiter1.calculate(y);
+        z = limiter2.calculate(z);
+        SmartDashboard.putNumber("Y", y);
+        SmartDashboard.putNumber("Z", z);
+        if (y < -0.15) {
+            SmartDashboard.putBoolean("Forward/Backward", true);
+        }
+        else if (y > 0.15) {
+            SmartDashboard.putBoolean("Forward/Backward", false);
+        }
     }
+    
 
 }
