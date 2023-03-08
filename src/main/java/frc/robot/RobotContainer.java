@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj.XboxController;
+// import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Chassis;
 // import frc.robot.subsystems.Music;
 import frc.robot.subsystems.candle;
@@ -25,7 +25,10 @@ public class RobotContainer {
   }
 
   private void candle_v() {
-    Candle.setDefaultCommand(Commands.run(() -> Candle.moveLED(c_controller.getLeftY()), Candle));
+    Candle.setDefaultCommand(Commands.run(() -> {
+      Candle.YmoveLED(c_controller.getLeftY());
+      Candle.ZmoveLED(c_controller.getRightX());
+    }, Candle));
   }
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

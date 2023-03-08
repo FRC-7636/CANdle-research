@@ -25,19 +25,33 @@ public class candle extends SubsystemBase {
   }
 
   public void stopAnimate() {
-    m_candle.setLEDs(0, 0, 0);
     m_candle.clearAnimation(0);
   }
 
-  public void moveLED(double y) {
+  public void YmoveLED(double y) {
     if (y < -0.15) {
-      m_candle.setLEDs(0, 255, 0);
+      m_candle.setLEDs(0, 255, 0, 0, 18, 4);
+      SmartDashboard.putBoolean("Forward/Backward", true);
     }
     else if (y > 0.15) {
-      m_candle.setLEDs(255, 0, 0);
+      m_candle.setLEDs(255, 0, 0, 0, 18, 4);
+      SmartDashboard.putBoolean("Forward/Backward", false);
     }
     else {
-      stopAnimate();
+      m_candle.setLEDs(0, 0, 0, 0, 18, 4);
+    }
+  }
+
+  public void ZmoveLED(double z) {
+    if (z > 0.05) {
+      m_candle.setLEDs(255, 162, 0, 0, 22, 3);
+    }
+    else if (z < -0.05) {
+      m_candle.setLEDs(255, 162, 0, 0, 15, 3);
+    }
+    else {
+      m_candle.setLEDs(0, 0, 0, 0, 22, 3);
+      m_candle.setLEDs(0, 0, 0, 0, 15, 3);
     }
   }
 
