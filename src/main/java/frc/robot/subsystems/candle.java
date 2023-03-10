@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class candle extends SubsystemBase {
   private CANdle m_candle = new CANdle(Constants.candleID);
   private final CANdleConfiguration config = new CANdleConfiguration();
+  private final StrobeAnimation TurnAnimation = new StrobeAnimation(255, 162, 0, 0, 0.05, 3);
 
 
   public candle() {
@@ -44,10 +45,12 @@ public class candle extends SubsystemBase {
 
   public void ZmoveLED(double z) {
     if (z > 0.05) {
-      m_candle.setLEDs(255, 162, 0, 0, 22, 3);
+      m_candle.animate(TurnAnimation, 22);
+      //  m_candle.setLEDs(255, 162, 0, 0, 22, 3);
     }
     else if (z < -0.05) {
-      m_candle.setLEDs(255, 162, 0, 0, 15, 3);
+      m_candle.animate(TurnAnimation, 15);
+      // m_candle.setLEDs(255, 162, 0, 0, 15, 3);
     }
     else {
       m_candle.setLEDs(0, 0, 0, 0, 22, 3);
